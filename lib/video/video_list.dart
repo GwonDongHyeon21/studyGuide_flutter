@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studyguide_flutter/url/video_url.dart';
 import 'package:studyguide_flutter/video/video_search_subject.dart';
 import 'package:studyguide_flutter/url/video_parse.dart';
+import 'package:studyguide_flutter/profile/my_profile.dart';
 
 class VideoList extends StatelessWidget {
   const VideoList({super.key});
@@ -96,9 +97,30 @@ class _VideoListPageState extends State<VideoListPage> {
               ),
             ),
           ),
-          Text(
-            '${widget.subject} 영상',
-            style: const TextStyle(fontSize: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey[300],
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyProfilePage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: GridView.count(

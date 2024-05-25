@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studyguide_flutter/video/video_list.dart';
 import 'package:studyguide_flutter/video/video_search.dart';
+import 'package:studyguide_flutter/profile/my_profile.dart';
 
 class VideoSubject extends StatelessWidget {
   const VideoSubject({Key? key}) : super(key: key);
@@ -52,6 +53,29 @@ class VideoSubjectPage extends StatelessWidget {
                 },
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey[300],
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyProfilePage()));
+                    },
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: GridView.count(
