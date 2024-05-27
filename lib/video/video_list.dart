@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studyguide_flutter/url/video_url.dart';
+import 'package:studyguide_flutter/url/video_url_list.dart';
 import 'package:studyguide_flutter/video/video_search_subject.dart';
-import 'package:studyguide_flutter/url/video_parse.dart';
 import 'package:studyguide_flutter/profile/my_profile.dart';
+import 'package:studyguide_flutter/url/video_url.dart';
 
 class VideoList extends StatelessWidget {
   const VideoList({super.key});
@@ -14,9 +14,7 @@ class VideoList extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const VideoListPage(
-        subject: '',
-      ),
+      home: const VideoListPage(subject: ''),
     );
   }
 }

@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyProfile extends StatelessWidget {
   const MyProfile({super.key});
@@ -11,11 +13,18 @@ class MyProfile extends StatelessWidget {
   }
 }
 
-class MyProfilePage extends StatelessWidget {
+class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
+  _MyProfilePage createState() => _MyProfilePage();
+}
+
+class _MyProfilePage extends State<MyProfilePage> {
+  @override
   Widget build(BuildContext context) {
+
     final List<String> watchHistory = [
       'Video 1',
       'Video 2',
@@ -29,6 +38,19 @@ class MyProfilePage extends StatelessWidget {
       'Video 10',
     ];
 
+    File? image;
+    final picker = ImagePicker();
+
+    Future getImage() async {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+      setState(() {
+        if (pickedFile != null) {
+          image = File(pickedFile.path);
+        } else {}
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('마이 프로필'),
@@ -38,18 +60,37 @@ class MyProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.grey[300],
-              child: const Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.white,
+            GestureDetector(
+              onTap: getImage,
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.grey[300],
+                    backgroundImage: image != null ? FileImage(image!) : null,
+                    child: image == null
+                        ? const Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          )
+                        : null,
+                  ),
+                  if(image == null)
+                  const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 16),
             const Text(
-              'User Name',
+              "",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -57,7 +98,7 @@ class MyProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'user@example.com',
+              '',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
