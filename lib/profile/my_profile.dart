@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:studyguide_flutter/user/login.dart';
 
 class MyProfile extends StatelessWidget {
   const MyProfile({super.key});
@@ -22,9 +25,60 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePage extends State<MyProfilePage> {
+  File? image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        image = File(pickedFile.path);
+      } else {
+        // No image selected
+      }
+    });
+  }
+
+  void logout() {
+    // 로그아웃 로직 구현
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('로그아웃 되었습니다.')),
+    );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
+  void deleteAccount() async {
+    // 회원 탈퇴 로직 구현
+    bool confirmed = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('회원 탈퇴'),
+        content: const Text('정말로 탈퇴하시겠습니까?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('탈퇴'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('회원 탈퇴가 완료되었습니다.')),
+      );
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final List<String> watchHistory = [
       'Video 1',
       'Video 2',
@@ -37,19 +91,6 @@ class _MyProfilePage extends State<MyProfilePage> {
       'Video 9',
       'Video 10',
     ];
-
-    File? image;
-    final picker = ImagePicker();
-
-    Future getImage() async {
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-      setState(() {
-        if (pickedFile != null) {
-          image = File(pickedFile.path);
-        } else {}
-      });
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -77,14 +118,14 @@ class _MyProfilePage extends State<MyProfilePage> {
                           )
                         : null,
                   ),
-                  if(image == null)
-                  const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.blue,
+                  if (image == null)
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.blue,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -158,6 +199,28 @@ class _MyProfilePage extends State<MyProfilePage> {
                 },
               ),
             ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: logout,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                  ),
+                  child: const Text('로그아웃'),
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: deleteAccount,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                  ),
+                  child: const Text('회원 탈퇴'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

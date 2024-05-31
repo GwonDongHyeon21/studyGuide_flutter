@@ -75,7 +75,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _logIn,
+              //onPressed: _logIn,
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const VideoSubjectPage()))
+              },
               child: const Text('Login'),
             ),
             TextButton(
