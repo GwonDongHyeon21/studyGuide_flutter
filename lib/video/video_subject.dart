@@ -13,13 +13,20 @@ class VideoSubject extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const VideoSubjectPage(),
+      home: const VideoSubjectPage(
+        email: '',
+        id: '',
+      ),
     );
   }
 }
 
 class VideoSubjectPage extends StatelessWidget {
-  const VideoSubjectPage({Key? key}) : super(key: key);
+  const VideoSubjectPage({Key? key, required this.email, required this.id})
+      : super(key: key);
+
+  final String email;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +71,14 @@ class VideoSubjectPage extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyProfilePage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyProfilePage(
+                            email: email,
+                            id: id,
+                          ),
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.person,
@@ -106,7 +118,11 @@ class VideoSubjectPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => VideoListPage(subject: subject),
+              builder: (context) => VideoListPage(
+                subject: subject,
+                email: email,
+                id: id,
+              ),
             ),
           );
         },

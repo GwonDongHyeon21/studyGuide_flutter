@@ -40,7 +40,12 @@ class _MyHomePage extends State<MyHomePage> {
       if (FirebaseAuth.instance.currentUser == null) {
         Get.off(() => const LoginPage());
       } else {
-        Get.off(() => const VideoSubjectPage());
+        Get.off(
+          () => const VideoSubjectPage(
+            email: '',
+            id: '',
+          ),
+        );
       }
     });
   }

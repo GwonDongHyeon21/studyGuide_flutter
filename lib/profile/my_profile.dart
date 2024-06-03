@@ -11,13 +11,20 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyProfilePage(),
+      home: MyProfilePage(
+        email: '',
+        id: '',
+      ),
     );
   }
 }
 
 class MyProfilePage extends StatefulWidget {
-  const MyProfilePage({Key? key}) : super(key: key);
+  const MyProfilePage({Key? key, required this.email, required this.id})
+      : super(key: key);
+
+  final String email;
+  final String id;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -28,58 +35,9 @@ class _MyProfilePage extends State<MyProfilePage> {
   File? image;
   final picker = ImagePicker();
 
-  Future getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        image = File(pickedFile.path);
-      } else {
-        // No image selected
-      }
-    });
-  }
-
-  void logout() {
-    // 로그아웃 로직 구현
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('로그아웃 되었습니다.')),
-    );
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const LoginPage()));
-  }
-
-  void deleteAccount() async {
-    // 회원 탈퇴 로직 구현
-    bool confirmed = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('회원 탈퇴'),
-        content: const Text('정말로 탈퇴하시겠습니까?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('취소'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('탈퇴'),
-          ),
-        ],
-      ),
-    );
-
-    if (confirmed) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('회원 탈퇴가 완료되었습니다.')),
-      );
-      Navigator.pop(context);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final List<String> watchHistory = [
+    final List<String> watchRecord = [
       'Video 1',
       'Video 2',
       'Video 3',
@@ -130,17 +88,17 @@ class _MyProfilePage extends State<MyProfilePage> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              "",
-              style: TextStyle(
+            Text(
+              widget.id,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              '',
-              style: TextStyle(
+            Text(
+              widget.email,
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
@@ -158,14 +116,14 @@ class _MyProfilePage extends State<MyProfilePage> {
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: watchHistory.length,
+                itemCount: watchRecord.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.only(right: 8),
                     width: 160,
                     child: Card(
                       child: Center(
-                        child: Text(watchHistory[index]),
+                        child: Text(watchRecord[index]),
                       ),
                     ),
                   );
@@ -185,14 +143,14 @@ class _MyProfilePage extends State<MyProfilePage> {
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: watchHistory.length,
+                itemCount: watchRecord.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.only(right: 8),
                     width: 160,
                     child: Card(
                       child: Center(
-                        child: Text(watchHistory[index]),
+                        child: Text(watchRecord[index]),
                       ),
                     ),
                   );
@@ -225,5 +183,52 @@ class _MyProfilePage extends State<MyProfilePage> {
         ),
       ),
     );
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        image = File(pickedFile.path);
+      } else {}
+    });
+  }
+
+  void logout() {
+    // 로그아웃 로직 구현
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('로그아웃 되었습니다.')),
+    );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
+  void deleteAccount() async {
+    // 회원 탈퇴 로직 구현
+    bool confirmed = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('회원 탈퇴'),
+        content: const Text('정말로 탈퇴하시겠습니까?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('탈퇴'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('회원 탈퇴가 완료되었습니다.')),
+      );
+      Navigator.pop(context);
+    }
   }
 }

@@ -19,22 +19,9 @@ class CreatorProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> watchHistory = [
-      'Video 1',
-      'Video 2',
-      'Video 3',
-      'Video 4',
-      'Video 5',
-      'Video 6',
-      'Video 7',
-      'Video 8',
-      'Video 9',
-      'Video 10',
-    ];
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('마이 프로필'),
+        title: const Text('강사 프로필'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,72 +39,10 @@ class CreatorProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'User Name',
+              'Creator Name',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'user@example.com',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              '좋아요 영상',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: watchHistory.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    width: 160,
-                    child: Card(
-                      child: Center(
-                        child: Text(watchHistory[index]),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '좋아요 강사',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: watchHistory.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    width: 160,
-                    child: Card(
-                      child: Center(
-                        child: Text(watchHistory[index]),
-                      ),
-                    ),
-                  );
-                },
               ),
             ),
           ],

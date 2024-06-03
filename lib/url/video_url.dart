@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:studyguide_flutter/url/video_parse.dart';
 import 'package:studyguide_flutter/profile/creator_profile.dart';
 
@@ -36,6 +37,28 @@ Widget buildLinkItem(String videoUrl) {
               final video = snapshot.data!;
               return InkWell(
                 onTap: openLink,
+                onLongPress: () {
+                  showDialog(
+                    context: ctx,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('저장'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              title: const Text('나중에 볼 동영상'),
+                              onTap: () {
+                                //saveVideoForLaterWatching(video, context);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -120,3 +143,28 @@ Widget buildLinkItem(String videoUrl) {
     ),
   );
 }
+/*
+void saveVideoForLaterWatching(YouTubeVideo video, BuildContext context) {
+  FirebaseFirestore.instance.collection('watch_later').add({
+    'title': video.title,
+    'thumbnailUrl': video.thumbnailUrl,
+    'viewCount': video.viewCount,
+    'channelTitle': video.channelTitle,
+    'channelThumbnailUrl': video.channelThumbnailUrl,
+  }).then((_) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('영상을 나중에 볼 목록에 추가했습니다!'),
+      ),
+    );
+  }).catchError((error) {
+    // ignore: avoid_print
+    print('Firestore 저장 오류: $error');
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('영상을 나중에 볼 목록에 추가하는 중 오류가 발생했습니다.'),
+      ),
+    );
+  });
+}
+*/

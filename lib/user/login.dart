@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:studyguide_flutter/user/signup.dart';
 import 'package:studyguide_flutter/video/video_subject.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -76,11 +77,14 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               //onPressed: _logIn,
-              onPressed: () => {
+              onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const VideoSubjectPage()))
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VideoSubjectPage(
+                        email: _emailController.text, id: _idController.text),
+                  ),
+                );
               },
               child: const Text('Login'),
             ),
@@ -111,7 +115,12 @@ class _LoginPageState extends State<LoginPage> {
       });
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const VideoSubjectPage()),
+        MaterialPageRoute(
+          builder: (context) => VideoSubjectPage(
+            email: _emailController.text,
+            id: _idController.text,
+          ),
+        ),
       );
     } on FirebaseAuthException catch (e) {
       print("Failed to sign in: $e");

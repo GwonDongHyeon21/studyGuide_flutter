@@ -14,14 +14,26 @@ class VideoList extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const VideoListPage(subject: ''),
+      home: const VideoListPage(
+        subject: '',
+        email: '',
+        id: '',
+      ),
     );
   }
 }
 
 class VideoListPage extends StatefulWidget {
-  const VideoListPage({super.key, required this.subject});
+  const VideoListPage({
+    super.key,
+    required this.subject,
+    required this.email,
+    required this.id,
+  });
+
   final String subject;
+  final String email;
+  final String id;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -100,22 +112,31 @@ class _VideoListPageState extends State<VideoListPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 20),
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey[300],
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyProfilePage(),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey[300],
+                      child: IconButton(
+                        onPressed: () {
+                          var email = widget.email;
+                          var id = widget.id;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyProfilePage(
+                                email: email,
+                                id: id,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.person,
+                          color: Colors.white,
                         ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.person,
-                      color: Colors.white,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ],
