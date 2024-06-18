@@ -13,8 +13,11 @@ Future<void> loginWithGoogle(BuildContext context) async {
     if (account != null) {
       final id = account.displayName;
       final email = account.email;
+      final googleAuth = await account.authentication;
+      String? accessToken = googleAuth.accessToken;
+      print(accessToken);
 
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => VideoSubjectPage(
@@ -22,6 +25,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
             id: id.toString(),
           ),
         ),
+        (route) => false,
       );
     } else {
       print('Google sign-in cancelled');

@@ -22,8 +22,6 @@ const Map<String, List<List<String>>> subjectVideoUrls = {
     ['https://www.youtube.com/watch?v=1NSXi66ip20', '김소이'],
     ['https://www.youtube.com/watch?v=FVB9Hg3jpbQ', '서울대쌍둥이(여호원, 여호용)'],
     ['https://www.youtube.com/watch?v=wlz1VmsgR00', '서울대쌍둥이(여호원, 여호용)'],
-    ['https://www.youtube.com/watch?v=_FHDcl2tDjY', '범작가'],
-    ['https://www.youtube.com/watch?v=TAmr_TXb-94', '심찬우'],
   ],
   '영어': [
     ['https://www.youtube.com/watch?v=Mhg3mJiNi3c', '조정식'],
