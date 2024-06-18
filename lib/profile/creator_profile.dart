@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:studyguide_flutter/api/api.dart';
 import 'package:studyguide_flutter/profile/creator_info_list.dart';
+import 'package:studyguide_flutter/profile/creator_video_list.dart';
 import 'package:studyguide_flutter/profile/my_video_detail.dart';
 import 'package:studyguide_flutter/video/video_player.dart';
 import 'package:studyguide_flutter/video/video_url_list.dart';
@@ -200,6 +201,36 @@ class _CreatorProfilePage extends State<CreatorProfilePage> {
                 ),
               ),
             const Spacer(),
+            Row(
+              children: [
+                const SizedBox(width: 15),
+                const Text(
+                  '강사의 영상 더보기',
+                  style: TextStyle(fontSize: 15),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreatorVideoListPage(
+                          email: widget.email,
+                          urlCreator: widget.urlCreator,
+                          creatorVideos: creatorVideos,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    '전체 보기 >>',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                )
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: SizedBox(

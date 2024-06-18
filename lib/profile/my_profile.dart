@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:studyguide_flutter/api/api.dart';
-import 'package:studyguide_flutter/profile/creator_list.dart';
+import 'package:studyguide_flutter/profile/my_creator_list.dart';
 import 'package:studyguide_flutter/profile/creator_profile.dart';
 import 'package:studyguide_flutter/profile/my_video_list.dart';
 import 'package:studyguide_flutter/profile/my_video_detail.dart';
@@ -351,9 +351,12 @@ class _MyProfilePage extends State<MyProfilePage> {
         duration: Duration(seconds: 1),
       ),
     );
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+      (route) => false,
     );
   }
 
@@ -384,9 +387,12 @@ class _MyProfilePage extends State<MyProfilePage> {
           duration: Duration(seconds: 1),
         ),
       );
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+        (route) => false,
       );
     }
   }

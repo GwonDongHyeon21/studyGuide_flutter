@@ -48,97 +48,102 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Study Guide',
-            style: TextStyle(fontSize: 20),
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text(
+              'Study Guide',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
+          titleTextStyle: const TextStyle(color: Colors.black),
+          backgroundColor: Colors.white,
         ),
-        titleTextStyle: const TextStyle(color: Colors.black),
-        backgroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 40),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(60.0),
-              child: Image.asset('assets/images/studyGuide_logo.png'),
-            ),
-            SizedBox(
-              width: 250,
-              child: TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'email'),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 40),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(60.0),
+                child: Image.asset('assets/images/studyGuide_logo.png'),
               ),
-            ),
-            SizedBox(
-              width: 250,
-              child: TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(labelText: 'email'),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _logIn,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 80, 180, 220),
-                fixedSize: const Size(200, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
               ),
-              child: const Text(
-                '로그인',
-                style: TextStyle(fontSize: 18),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _logIn,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 80, 180, 220),
+                  fixedSize: const Size(200, 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child: const Text(
+                  '로그인',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignupPage()),
-                );
-              },
-              child: const Text(
-                '회원가입',
-                style: TextStyle(color: Color.fromARGB(255, 80, 180, 220)),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignupPage()),
+                  );
+                },
+                child: const Text(
+                  '회원가입',
+                  style: TextStyle(color: Color.fromARGB(255, 80, 180, 220)),
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                loginWithGoogle(context);
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.black,
-                fixedSize: const Size(200, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
+              ElevatedButton(
+                onPressed: () {
+                  loginWithGoogle(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black,
+                  fixedSize: const Size(200, 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/google_logo.png',
+                      height: 30,
+                      width: 30,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(width: 2),
+                    const Text(
+                      '구글 로그인',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/google_logo.png',
-                    height: 30,
-                    width: 30,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(width: 2),
-                  const Text(
-                    '구글 로그인',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
