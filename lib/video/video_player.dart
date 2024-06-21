@@ -212,12 +212,6 @@ class _VideoPage extends State<VideoPage> {
                         onPressed: () {
                           _copyToClipboard(widget.videoUrl);
                         },
-                        icon: const Icon(Icons.share),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          _copyToClipboard(widget.videoUrl);
-                        },
                         icon: const Icon(Icons.copy),
                       ),
                     ],

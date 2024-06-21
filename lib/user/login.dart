@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:studyguide_flutter/user/login_google.dart';
 import 'package:studyguide_flutter/user/signup.dart';
 import 'package:studyguide_flutter/video/video_subject.dart';
@@ -33,10 +34,13 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  final googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
     super.initState();
+
+    googleSignIn.signOut();
   }
 
   @override

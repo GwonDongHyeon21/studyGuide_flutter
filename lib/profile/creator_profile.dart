@@ -126,9 +126,11 @@ class _CreatorProfilePage extends State<CreatorProfilePage> {
                 CircleAvatar(
                   radius: 80,
                   backgroundColor: Colors.grey[300],
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(widget.channelThumbnailUrl),
-                    radius: 80,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/creators/${widget.urlCreator}.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const Spacer(),
