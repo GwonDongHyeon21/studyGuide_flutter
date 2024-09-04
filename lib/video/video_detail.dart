@@ -5,7 +5,7 @@ import 'package:studyguide_flutter/video/video_list_build.dart';
 
 Future<VideoDetail> fetchVideoDetails(String videoUrl) async {
   final videoId = videoUrl.split('v=')[1];
-  const apiKey = 'AIzaSyCpJIzIv27HzCXJ-Gr7xDyia3N5s-jFaIw';
+  const apiKey = 'API_KEY';
   final apiUrl =
       'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=$videoId&key=$apiKey';
   final response = await http.get(Uri.parse(apiUrl));

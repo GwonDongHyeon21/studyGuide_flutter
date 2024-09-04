@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "***REMOVED***",
+    "project_number": "54914006362",
     "project_id": "studyguide-flutter-90e3d",
     "storage_bucket": "studyguide-flutter-90e3d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:***REMOVED***:android:175fdc53de309828828763",
+        "mobilesdk_app_id": "1:54914006362:android:175fdc53de309828828763",
         "android_client_info": {
           "package_name": "com.example.studyguide_flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "***REMOVED***-9vbusc8okplfa65vhnrao63ir6enqu00.apps.googleusercontent.com",
+          "client_id": "54914006362-9vbusc8okplfa65vhnrao63ir6enqu00.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.studyguide_flutter",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "***REMOVED***-hnq53el6vq6j4tu7imlcss12p6rhd8gi.apps.googleusercontent.com",
+          "client_id": "54914006362-hnq53el6vq6j4tu7imlcss12p6rhd8gi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "***REMOVED***"
+          "current_key": "AIzaSyAJluQjgf1AACZ0qcAtdYiCWBNalS2I5P0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "***REMOVED***-hnq53el6vq6j4tu7imlcss12p6rhd8gi.apps.googleusercontent.com",
+              "client_id": "54914006362-hnq53el6vq6j4tu7imlcss12p6rhd8gi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
